@@ -95,15 +95,15 @@ class Application(tk.Frame):
         multiFileOpenButton.grid(row=3,column=0)
 
         # ボタン動作
-        fileOpenButton.bind('<ButtonPress>', self.file_dialog)
-        multiFileOpenButton.bind('<ButtonPress>', self.multi_file_convert)
-        saveFolderButton.bind('<ButtonPress>', self.dir_dialog)
+        fileOpenButton.bind('<ButtonPress>', self.on_click_file_dialog)
+        multiFileOpenButton.bind('<ButtonPress>', self.on_click_multi_file_convert)
+        saveFolderButton.bind('<ButtonPress>', self.on_click_dir_dialog)
         self.vmax_value.bind("<Return>", self.draw_plot)
         self.vmin_value.bind("<Return>", self.draw_plot)
 
         self.draw_plot()
 
-    def file_dialog(self, event):
+    def on_click_file_dialog(self, event):
         fTyp = [("*SIXファイル", "*.SIX")]
         file_name = tk.filedialog.askopenfilename(filetypes=fTyp, initialdir=self.initFolder.get())
         if file_name:
@@ -114,13 +114,13 @@ class Application(tk.Frame):
 
         return "break"
     
-    def multi_file_dialog(self, event):
+    def on_click_multi_file_dialog(self, event):
         fTyp = [("*SIXファイル", "*.SIX")]
         file_names = tk.filedialog.askopenfilenames(filetypes=fTyp, initialdir=self.initFolder.get())
 
         return file_names
     
-    def dir_dialog(self, event):
+    def on_click_dir_dialog(self, event):
         iDirPath = tk.filedialog.askdirectory(initialdir = self.saveFolder.get())
         if iDirPath:
             self.saveFolder.set(iDirPath)
